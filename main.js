@@ -23,6 +23,13 @@ function showSection(index) {
     }
     sections[index].classList.add("active-section");
     currentSectionIndex = index;
+    
+    // Show or hide previous button based on the current section index
+    if (currentSectionIndex === 0) {
+      previousButton.style.opacity = 0;
+    } else {
+      previousButton.style.opacity = 1;
+    }
   }
 }
 
@@ -100,7 +107,33 @@ pointedRoof.addEventListener('click', () => {
 // This is for changing images in the background
 // This is for active roof slection options
 
+// This is for active panel Type slection options
+const optionsPanel = document.querySelectorAll('.option1');
 
+optionsPanel.forEach(option1 => {
+  option1.addEventListener('click', () => {
+    optionsPanel.forEach(opt => opt.classList.remove('active'));
+    option1.classList.add('active');
+    
+  });
+});
+
+// This is for changing images in the background
+const contentDisplay = document.querySelector(".section4 .contentDisplay");
+const essential = document.querySelector('#essential');
+const design = document.querySelector('#design');
+const pro = document.querySelector('#pro');
+essential.addEventListener('click', () => {
+  
+})
+design.addEventListener('click', () => {
+ 
+})
+pro.addEventListener('click', () => {
+  
+})
+// This is for changing images in the background
+// This is for active panel Type slection options
 
 // creating an object for ROOF TYPE
 const roofSlope = {
