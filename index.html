@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+        <nav class="navLinks">
+            <ul>
+                <li><a href="#Address">Address</a></li>
+                <li><a href="#NumberOfCells">Number of solar cells</a></li>
+                <li><a href="#RoofSlope">Roof slope</a></li>
+                <li><a href="">Panel type</a></li>
+                <li><a href="">Ownership</a></li>
+                <li><a href="">Summation</a></li>
+            </ul>
+            <div class="price">
+                <div class="value">
+                    <span>- kr</span>
+                    <span>Value of solar energy per year</span>
+                </div>
+                <div class="investment">
+                    <span>- kr</span>
+                    <span>Your investment</span>
+                </div>
+            </div>
+        </nav>
+    </div>
+    </header>
+
+    <main>
+      <section class="section1 sectionNone active-section" id="Address">
+        <div class="mainDisplay grid-row">
+            <div class="column" id="column1"></div>
+            <div class="column" id="column2">
+                <div class="options"> 
+                    <h2>Calculate the potential of your roof</h2>
+                    <p>Enter your address in the field below to measure your roof. Together we can create a more sustainable Sweden.</p>
+                    <input id="address" type="text" placeholder="Enter your street address and number" value="">
+                    <div id="validationMessage" style="display: none; color: red;">Enter a Valid address</div>
+                    <div class="navButtons">
+                      <button class="btn" onclick="previousSection()"><i class="fa-light fa-arrow-left"></i>Previous</button>
+                      <button class="btn" onclick="nextSection()">Next<i class="fa-light fa-arrow-right"></i></button>
+                   </div>
+                    </div>
+            </div>
+        </div>
+      </section>
+
+
+      <section class="section2 sectionNone" id="NumberOfCells">
+        <div class="mainDisplay grid-row">
+            <div class="column" id="column1"></div>
+            <div class="column" id="column2">
+                <div class="area"> 
+                    <h2>How big is your ceiling?</h2>
+                    <p>Did we not find your address? No danger. Enter how big your roof is in square meters below, and you can still do your calculations and submit a request for a quote.</p>
+                    <span><input type="number" placeholder="Number of square meters" value=""></span>
+                    <div class="navButtons">
+                      <button class="btn" onclick="previousSection()"><i class="fa-light fa-arrow-left"></i>Previous</button>
+                      <button class="btn" onclick="nextSection()">Next<i class="fa-light fa-arrow-right"></i></button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+      </section>
+
+      <section class="section3 sectionNone" id="RoofSlope">
+        <div class="mainDisplay grid-row">
+            <div class="column" id="column1"></div>
+            <div class="column" id="column2">
+                <div class="roofType"> 
+                    <h2>How much does your roof slope?</h2>
+                    <p>This helps us calculate the solar effect.</p>
+                    <div class="container">
+                      <div id="flatRoof" class="option">
+                        <span>Flat roof</span>
+                        <span>0-15°</span>
+                      </div>
+                    
+                      <div id="ordinaryRoof" class="option">
+                        <span>Ordinary ceiling</span>
+                        <span>15-30°</span>
+                      </div>
+                    
+                      <div id="pointedRoof" class="option">
+                        <span>Pointed roof</span>
+                        <span>30° ></span>
+                      </div>
+                    </div>
+                    <div class="navButtons">
+                      <button class="btn" onclick="previousSection()"><i class="fa-light fa-arrow-left"></i>Previous</button>
+                      <button class="btn" onclick="nextSection()">Next<i class="fa-light fa-arrow-right"></i></button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+      </section>
+    </main>
+</body>
+<script src="/main.js"></script>
+</html>

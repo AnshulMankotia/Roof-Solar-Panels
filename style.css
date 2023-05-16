@@ -1,0 +1,277 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.grid-row{
+    display: grid;
+}
+
+/* This is used to switch between the sections */
+.sectionNone {
+  display: none;
+}
+.active-section {
+  display: block;
+}
+/* This is used to switch between the sections */
+
+.btn {
+  padding: 10px 20px;
+  margin: 10px;
+}
+i{
+  font-family: FontAwesome;
+  font-style: normal;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+li {
+  list-style: none;
+}
+img{
+    width: 100%;
+    display: block;
+}
+header .navLinks {
+ display: grid;
+ grid-template-columns: 1fr auto;
+ width: 100%;
+ box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 20px;
+}
+header .navLinks ul {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  align-items: center;
+  height: 5rem;
+}
+header .navLinks > ul > li {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 150ms ease 0s;
+  position: relative;
+}
+
+header .navLinks > ul > li a.activeLink {
+  border-bottom: 2px solid black;
+  font-weight: 600;
+  margin-top: 2px;
+  padding-bottom: 4px;
+  transition: all 250ms ease 0s;
+}
+header .navLinks ul li:hover {
+  background-color: rgb(229, 229, 229);
+}
+header .price {
+  display: flex;
+  justify-content: space-around;
+  height: 5rem;
+  background-color: rgb(36, 34, 40);
+  border-top-right-radius: 20px;
+  color: white;
+}
+header .price > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  font-size: 0.875rem;
+}
+
+
+/* Main Display styling */
+.mainDisplay{
+    grid-template-columns: 1fr 1fr;
+    min-height: 74vh;
+}
+.section1 .mainDisplay #column1{
+    background-image:url("/Assets/ordinaryPanel.png"),url("/Assets/OrdinaryRoof.png");
+    border-bottom-left-radius: 20px;
+    background-position-y:center,center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+.mainDisplay #column2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 20px;
+}
+
+.mainDisplay #column2 .options{
+  position: absolute;
+  left: 9%;
+  top: 3%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; 
+  height: 90%;
+  width: 90%;
+  justify-content: center;
+}
+.navButtons{
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 3rem;
+}
+.navButtons button{
+  background-color: rgb(189, 186, 195);
+  border: none;
+  color: rgb(255, 255, 255);
+  padding: 1rem 1.5rem;
+  border-radius: 99px;
+  font-size: 16px;
+  transition: all 200ms ease-out 0s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.mainDisplay #column2 .navButtons button:hover{
+  background-color: rgb(54, 50, 65);
+}
+.mainDisplay #column2 .navButtons button:nth-of-type(1)>i{
+  padding: 0rem 1rem 0rem 0rem;
+}
+.mainDisplay #column2 .navButtons button:nth-of-type(2)>i{
+  padding: 0rem 0rem 0rem 1rem;
+}
+
+.mainDisplay #column2 .options h2{
+    font-weight: 100;
+    font-size: 1.5rem;
+    color: rgb(61, 61, 61);
+}
+.mainDisplay #column2 .options p{
+  color: rgb(61, 61, 61);
+}
+.mainDisplay #column2 .options input{
+    padding: 1.3rem;
+    border-radius: 30px;
+    border: 1px solid rgb(111, 111, 111);
+    font-size: 1rem;
+    width: 25rem;
+}
+/* //Main Display styling */
+
+/* styling Area section  */
+.section2 .mainDisplay #column1{
+  background-image:url("/Assets/ordinaryPanel.png"),url("/Assets/OrdinaryRoof.png");
+    border-bottom-left-radius: 20px;
+    background-position-y:center,center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.mainDisplay #column2 .area{
+  position: absolute;
+  left: 9%;
+  top: 3%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; 
+  height: 90%;
+  width: 90%;
+  justify-content: center;
+}
+.mainDisplay #column2 .area h2{
+  font-weight: 100;
+  font-size: 1.5rem;
+  color: rgb(61, 61, 61);
+}
+.mainDisplay #column2 .area p{
+color: rgb(61, 61, 61);
+}
+
+.mainDisplay #column2 .area input{
+  border: 1px solid transparent;
+  border-bottom: 1px solid rgb(111, 111, 111);
+  font-size: 1rem;
+  border-radius: 0;
+  width: 13rem;
+  padding: 1rem 0rem;
+  outline: none;
+}
+.mainDisplay #column2 .area span::after{
+  content: "m²";
+    display: inline-block;
+    position: absolute;
+    opacity: 0.7;
+    top: 56%;
+    left: 24%;
+}
+/* styling Area section  */
+
+
+
+/* styling ROOF SELECTION section  */
+.section3 .mainDisplay #column1{
+  background-image:url("/Assets/flatRoof.png");
+    border-bottom-left-radius: 20px;
+    background-position-y:center,center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.mainDisplay #column2 .roofType{
+  position: absolute;
+  left: 9%;
+  top: 3%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; 
+  height: 90%;
+  width: 90%;
+  justify-content: center;
+}
+.mainDisplay #column2 .roofType h2{
+  font-weight: 100;
+  font-size: 1.5rem;
+  color: rgb(61, 61, 61);
+}
+.mainDisplay #column2 .roofType p{
+color: rgb(61, 61, 61);
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 25rem;
+  background-color: rgb(247 247 247);
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  padding:1.25rem; 
+}
+
+/* active class */
+.option:hover:not(.active) {
+  background-color: rgb(228, 228, 228);
+  /*It means background color changes on hover only in non-active options */
+}
+
+.active {
+  background-color: rgb(36, 34, 40);
+}
+.active:hover {
+  background-color: black;
+}
+.active span {
+  color: white;
+}
+/* active class */
+/* styling ROOF SELECTION section  */
