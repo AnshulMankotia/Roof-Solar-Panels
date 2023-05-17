@@ -12,9 +12,12 @@ navLinks.forEach((link) => {
 });
 // Get all navigation links active
 
+// ------------------------------------------------------------------------------------------
+
 // Switch Between the sections through back and next buttons
 var currentSectionIndex = 0;
 var sections = document.getElementsByClassName("sectionNone");
+var previousButton = document.getElementById("previousButton");
 
 function showSection(index) {
   if (index >= 0 && index < sections.length) {
@@ -42,10 +45,10 @@ function nextSection() {
 }
 // Switch Between the sections through back and next buttons
 
+// --------------------------SECTION-1----------------------------------------------------------------
 
+// Validate ADDRESS and set data to the local storage 
 const cities = ["New York", "London", "Paris", "Tokyo", "Sydney"];
-const section2 = document.querySelector(".section2");
-const section1 = document.querySelector(".section1");
 localStorage.setItem("city", JSON.stringify(cities));
 
 function validateAddress() {
@@ -53,28 +56,31 @@ function validateAddress() {
   const cityArray = JSON.parse(localStorage.getItem("city"));
   const isValid = cityArray.includes(addressInput);
   const validationMessage = document.getElementById("validationMessage");
-
+  
   if (isValid) {
     const data = {
       address: addressInput,
     };
-    localStorage.setItem('myData', JSON.stringify(data));
-    section1.style.display = "none";
-    section2.style.display = "grid";
+    localStorage.setItem('Address', JSON.stringify(data));
   } else {
     validationMessage.style.display = "block";
   }
 }
+// Validate ADDRESS and set data to the local storage 
 
+// --------------------------SECTION-2----------------------------------------------------------------
 
-
-// Adding Area Section and Disabling Options Section
-const section3 = document.querySelector(".section3")
-function addingArea() {
-  section3.style.display="grid"
-  section2.style.display = "none";
-
+// this is to store data in local storage as Area Input fileld
+function areaInput(){
+  const areaInputValue = document.querySelector('#areaInput').value;
+  const data1 = {
+    area: areaInputValue + " m²",
+  };
+  localStorage.setItem('Area', JSON.stringify(data1))
 }
+// this is to store data in local storage as Area Input fileld
+
+// --------------------------SECTION-3----------------------------------------------------------------
 
 // this is for active roof slection options
 const options = document.querySelectorAll('.option');
@@ -83,9 +89,11 @@ options.forEach(option => {
   option.addEventListener('click', () => {
     options.forEach(opt => opt.classList.remove('active'));
     option.classList.add('active');
-    
+    const selectedOption = option.querySelector('span:first-child').innerText;
+    localStorage.setItem('Panel Type', selectedOption);
   });
 });
+// this is for active roof slection options
 
 // This is for changing images in the background
 const img1 = document.querySelector(".section3 .mainDisplay #column1");
@@ -107,18 +115,40 @@ pointedRoof.addEventListener('click', () => {
 // This is for changing images in the background
 // This is for active roof slection options
 
+
+// ---------------------------SECTION-4---------------------------------------------------------------
+
 // This is for active panel Type slection options
 const optionsPanel = document.querySelectorAll('.option1');
+const valueDiv = document.querySelector('.price .value span:first-child');
+const investmentDiv = document.querySelector('.price .investment span:first-child');
+
+// Define the price data as an object
+const priceData = {
+  'Essential': 4041368 +" kr",
+  'Design': 3943986 +" kr",
+  'Pro': 4041368 +" kr"
+};
+const investData = {
+  'Essential': 20533121 +" kr",
+  'Design': 20881223 +" kr",
+  'Pro': 36268860 +" kr"
+};
 
 optionsPanel.forEach(option1 => {
   option1.addEventListener('click', () => {
     optionsPanel.forEach(opt => opt.classList.remove('active'));
     option1.classList.add('active');
-    
+    const selectedOption1 = option1.querySelector('span:first-child').innerText;
+    const price = priceData[selectedOption1] || 0;
+    const investement = investData[selectedOption1] || 0;
+    valueDiv.textContent = price;
+    investmentDiv.textContent = investement;
   });
 });
+// This is for active panel Type slection options
 
-// This is for changing images in the background
+// This is for changing the content inside the div in section4
 const contentDisplay = document.querySelector(".section4 .contentDisplay");
 const essential = document.querySelector('#essential');
 const design = document.querySelector('#design');
@@ -132,43 +162,5 @@ design.addEventListener('click', () => {
 pro.addEventListener('click', () => {
   
 })
-// This is for changing images in the background
 // This is for active panel Type slection options
 
-// creating an object for ROOF TYPE
-const roofSlope = {
-   roof:[{
-       roofType:'Flat Roof'
-    },
-    {
-        roofType:'Ordinary ceiling'
-    },
-    {
-        roofType:'Pointed roof'
-}]
-  }
-  // storing it in the localStorage
-  localStorage.setItem('Roof Type', JSON.stringify(roofSlope))
-  console.log(roofSlope.roof[0].roofType)
-  
-  // creating an object for SOLAR TYPE PANELS
-  const solarPanels = {
-      panels:[{
-          panelType:'Essential',
-          price:"404492",
-          investment:'2100957'
-        },
-        {
-            panelType:'Design',
-            price:"394746",
-            investment:'2135811 '
-        },
-        {
-            panelType:'Pro',
-            price:"404492",
-            investment:'3674594'
-        }]
-    }
-    // storing it in the localStorage
-    localStorage.setItem('Panel Type', JSON.stringify(solarPanels))
-    console.log(solarPanels.panels[1].panelType)
