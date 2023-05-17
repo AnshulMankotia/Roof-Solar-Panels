@@ -90,7 +90,7 @@ options.forEach(option => {
     options.forEach(opt => opt.classList.remove('active'));
     option.classList.add('active');
     const selectedOption = option.querySelector('span:first-child').innerText;
-    localStorage.setItem('Panel Type', selectedOption);
+    localStorage.setItem('Roof Slope', selectedOption);
   });
 });
 // this is for active roof slection options
@@ -118,12 +118,10 @@ pointedRoof.addEventListener('click', () => {
 
 // ---------------------------SECTION-4---------------------------------------------------------------
 
-// This is for active panel Type slection options
 const optionsPanel = document.querySelectorAll('.option1');
 const valueDiv = document.querySelector('.price .value span:first-child');
 const investmentDiv = document.querySelector('.price .investment span:first-child');
 
-// Define the price data as an object
 const priceData = {
   'Essential': 4041368 +" kr",
   'Design': 3943986 +" kr",
@@ -135,32 +133,27 @@ const investData = {
   'Pro': 36268860 +" kr"
 };
 
-optionsPanel.forEach(option1 => {
-  option1.addEventListener('click', () => {
-    optionsPanel.forEach(opt => opt.classList.remove('active'));
-    option1.classList.add('active');
-    const selectedOption1 = option1.querySelector('span:first-child').innerText;
-    const price = priceData[selectedOption1] || 0;
-    const investement = investData[selectedOption1] || 0;
-    valueDiv.textContent = price;
-    investmentDiv.textContent = investement;
+const setActivePanel = (selectedOption) => {
+  optionsPanel.forEach(option => option.classList.toggle('active', option === selectedOption));
+  localStorage.setItem('Panel Type', selectedOption.querySelector('span:first-child').innerText);
+  valueDiv.textContent = priceData[selectedOption.innerText] || 0;
+  investmentDiv.textContent = investData[selectedOption.innerText] || 0;
+};
+
+optionsPanel.forEach(option => option.addEventListener('click', () => setActivePanel(option)));
+
+const options2 = document.querySelectorAll('.option1');
+const contentDisplays = document.querySelectorAll('.contentDisplay');
+contentDisplays.forEach(contentDisplay => contentDisplay.style.display = 'none');
+document.getElementById('design-content').style.display = 'flex';
+
+options2.forEach(option => {
+  option.addEventListener('click', function() {
+    const optionId = this.id;
+    const contentId = optionId + '-content';
+    contentDisplays.forEach(contentDisplay => contentDisplay.style.display = 'none');
+    document.getElementById(contentId).style.display = 'flex';
   });
 });
-// This is for active panel Type slection options
-
-// This is for changing the content inside the div in section4
-const contentDisplay = document.querySelector(".section4 .contentDisplay");
-const essential = document.querySelector('#essential');
-const design = document.querySelector('#design');
-const pro = document.querySelector('#pro');
-essential.addEventListener('click', () => {
-  
-})
-design.addEventListener('click', () => {
- 
-})
-pro.addEventListener('click', () => {
-  
-})
 // This is for active panel Type slection options
 
