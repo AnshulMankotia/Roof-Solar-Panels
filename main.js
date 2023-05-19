@@ -184,6 +184,28 @@ options2.forEach(option => {
 
 
 
+// Add an event listener to the checkbox
+var checkbox = document.querySelector('.checkbox input');
+checkbox.addEventListener('change', function() {
+  var rows = document.getElementsByClassName('row');
+
+  if (this.checked) {
+    // Remove the 'activeRow' class from all rows
+    for (var j = 1; j < rows.length; j++) {
+      rows[j].classList.remove('activeRow');
+    }
+    // Delete the stored value from local storage
+    localStorage.removeItem('Ownership');
+  } else {
+    // Add the 'activeRow' class to the initially selected row
+    rows[1].classList.add('activeRow');
+    // Get the selected option text
+    var selectedOption = rows[1].querySelector('.selection').innerText;
+    // Store the selected option in local storage
+    localStorage.setItem('Ownership', selectedOption);
+  }
+});
+
 // Add an event listener to each row
 var rows = document.getElementsByClassName('row');
 for (var i = 1; i < rows.length; i++) {
@@ -194,10 +216,13 @@ for (var i = 1; i < rows.length; i++) {
     }
     // Add the 'activeRow' class to the clicked row
     this.classList.add('activeRow');
-     // Get the selected option text
-     var selectedOption = this.querySelector('.selection').innerText;
-
-     // Store the selected option in local storage
-     localStorage.setItem('Ownership', selectedOption);
+    // Get the selected option text
+    var selectedOption = this.querySelector('.selection').innerText;
+    // Store the selected option in local storage
+    localStorage.setItem('Ownership', selectedOption);
+    // Uncheck the checkbox
+    checkbox.checked = false;
   });
 }
+
+
