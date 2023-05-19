@@ -1,23 +1,7 @@
-// Get all navigation links active
-const navLinks = document.querySelectorAll("header nav ul li a");
-
-// Add event listeners to each navigation link
-navLinks.forEach((link) => {
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
-    navLinks.forEach((link) => link.classList.remove("activeLink"));
-    
-    link.classList.add("activeLink");
-  });
-});
-// Get all navigation links active
-
-// ------------------------------------------------------------------------------------------
-
-// Switch Between the sections through back and next buttons
 var currentSectionIndex = 0;
 var sections = document.getElementsByClassName("sectionNone");
 var previousButton = document.getElementById("previousButton");
+var navLinks = document.getElementsByClassName("navLinks")[0].getElementsByTagName("a");
 
 function showSection(index) {
   if (index >= 0 && index < sections.length) {
@@ -26,7 +10,13 @@ function showSection(index) {
     }
     sections[index].classList.add("active-section");
     currentSectionIndex = index;
-    
+
+    // Update active link based on current section index
+    for (var j = 0; j < navLinks.length; j++) {
+      navLinks[j].classList.remove("activeLink");
+    }
+    navLinks[currentSectionIndex].classList.add("activeLink");
+
     // Show or hide previous button based on the current section index
     if (currentSectionIndex === 0) {
       previousButton.style.opacity = 0;
@@ -42,6 +32,27 @@ function previousSection() {
 
 function nextSection() {
   showSection(currentSectionIndex + 1);
+}
+
+// Add event listeners to the navigation links
+for (var i = 0; i < navLinks.length; i++) {
+  navLinks[i].addEventListener("click", function(e) {
+    e.preventDefault(); // Prevent the default link behavior
+
+    // Remove the "activeLink" class from all links
+    for (var j = 0; j < navLinks.length; j++) {
+      navLinks[j].classList.remove("activeLink");
+    }
+
+    // Add the "activeLink" class to the clicked link
+    this.classList.add("activeLink");
+
+    var targetSection = this.getAttribute("href"); // Get the target section ID
+    var index = Array.from(sections).findIndex(function(section) {
+      return section.id === targetSection.substring(1);
+    });
+    showSection(index);
+  });
 }
 // Switch Between the sections through back and next buttons
 
@@ -94,7 +105,10 @@ options.forEach(option => {
   });
 });
 // this is for active roof slection options
-
+const nextButton = document.getElementById('nextButton');
+nextButton.addEventListener('click', () => {
+  localStorage.setItem('Roof Slope', selectedOption);
+});
 // This is for changing images in the background
 const img1 = document.querySelector(".section3 .mainDisplay #column1");
 const flatRoof = document.querySelector('#flatRoof');
@@ -112,6 +126,12 @@ pointedRoof.addEventListener('click', () => {
   img1.style.backgroundImage ="url('/Assets/pointedPanel.png'), url('/Assets/pointedRoof.png')";
   img1.style.transition ="all 1s"
 })
+const defaultOption = document.querySelector('#ordinaryRoof');
+defaultOption.classList.add('active');
+const selectedOption = defaultOption.querySelector('span:first-child').innerText;
+localStorage.setItem('Roof Slope', selectedOption);
+img1.style.backgroundImage = "url('/Assets/ordinaryPanel.png'), url('/Assets/ordinaryRoof.png')";
+img1.style.transition = "all 1s";
 // This is for changing images in the background
 // This is for active roof slection options
 
@@ -123,14 +143,14 @@ const valueDiv = document.querySelector('.price .value span:first-child');
 const investmentDiv = document.querySelector('.price .investment span:first-child');
 
 const priceData = {
-  'Essential': 4041368 +" kr",
-  'Design': 3943986 +" kr",
-  'Pro': 4041368 +" kr"
+  'Essential': '4041368 kr',
+  'Design': '3943986 kr',
+  'Pro': '4041368 kr'
 };
 const investData = {
-  'Essential': 20533121 +" kr",
-  'Design': 20881223 +" kr",
-  'Pro': 36268860 +" kr"
+  'Essential': '20533121 kr',
+  'Design': '20881223 kr',
+  'Pro': '36268860 kr'
 };
 
 const setActivePanel = (selectedOption) => {
@@ -146,6 +166,8 @@ const options2 = document.querySelectorAll('.option1');
 const contentDisplays = document.querySelectorAll('.contentDisplay');
 contentDisplays.forEach(contentDisplay => contentDisplay.style.display = 'none');
 document.getElementById('design-content').style.display = 'flex';
+document.getElementById('design').classList.add('active'); // Add the 'active' class to the 'design' option
+localStorage.setItem('Panel Type', 'Design'); // Set 'Design' as the default value in local storage
 
 options2.forEach(option => {
   option.addEventListener('click', function() {
@@ -153,7 +175,29 @@ options2.forEach(option => {
     const contentId = optionId + '-content';
     contentDisplays.forEach(contentDisplay => contentDisplay.style.display = 'none');
     document.getElementById(contentId).style.display = 'flex';
+    localStorage.setItem('Panel Type', optionId.charAt(0).toUpperCase() + optionId.slice(1)); // Store the selected option in local storage
   });
 });
+
+
 // This is for active panel Type slection options
 
+
+
+// Add an event listener to each row
+var rows = document.getElementsByClassName('row');
+for (var i = 1; i < rows.length; i++) {
+  rows[i].addEventListener('click', function() {
+    // Remove the 'activeRow' class from all rows
+    for (var j = 1; j < rows.length; j++) {
+      rows[j].classList.remove('activeRow');
+    }
+    // Add the 'activeRow' class to the clicked row
+    this.classList.add('activeRow');
+     // Get the selected option text
+     var selectedOption = this.querySelector('.selection').innerText;
+
+     // Store the selected option in local storage
+     localStorage.setItem('Ownership', selectedOption);
+  });
+}

@@ -16,8 +16,8 @@
                 <li><a href="#Address">Address</a></li>
                 <li><a href="#NumberOfCells">Number of solar cells</a></li>
                 <li><a href="#RoofSlope">Roof slope</a></li>
-                <li><a href="">Panel type</a></li>
-                <li><a href="">Ownership</a></li>
+                <li><a href="#PanelType">Panel type</a></li>
+                <li><a href="#ownership">Ownership</a></li>
                 <li><a href="">Summation</a></li>
             </ul>
             <div class="price">
@@ -108,12 +108,12 @@
         <div class="mainDisplay grid-row">
             <div class="column" id="column1"></div>
             <div class="column" id="column2">
-                <div class="PanelType"> 
+                <div class="panelType"> 
                     <h2>Select the type of solar panel</h2>
                     <p>Choose from our options to find the right solution for you. Price and savings change based on your selections. See all details in the next step.</p>
                     <div class="container">
                       <div id="essential" class="option1">
-                        <span>Essential<span>                       
+                        <span>Essential<span>                                            
                       </div>
                     
                       <div id="design" class="option1">
@@ -180,6 +180,55 @@
                     </div>
 
             </div>
+        </div>
+      </section>
+
+
+
+
+      <section class="section5 sectionNone" id="ownership">
+        <div class="mainDisplay grid-row">
+            <div class="column" id="column1"></div>
+            <div class="column" id="column2">
+                <div class="OwnerShip"> 
+                    <h2>How do you want your solar cells?</h2>
+                    <p>Choose between buying your solar cells and leasing them at a fixed monthly cost where full service, warranty and installation are included.</p>
+                    <div class="ownershipType">
+                    <div class="row">
+                      <span class="selection"></span>
+                      <div class="nonActiveBorder">
+                        <span class="borderBottom">Warranty and service</span>
+                        <span class="borderBottom">Value producedsun</span>
+                        <span>Price estimate afterdeduction</span>
+                      </div>
+                    </div>
+                    <div class="row" id="activeRow">
+                      <span class="selection">Leasing</span>
+                      <div class="activeBorder">
+                        <span class="borderBottom">Expanded</span>
+                        <span class="borderBottom">DKK 39,435,520/year</span>
+                        <span class="bold">SEK 1,352,262/month</span>
+                      </div>                      
+                    </div>
+                    <div class="row" id="activeRow">
+                      <span class="selection">Buy</span>
+                      <div class="activeBorder">
+                        <span class="borderBottom">Standard</span>
+                        <span class="borderBottom">DKK 39,435,520/year</span>
+                        <span class="bold">193 764 093 kr</span>
+                      </div>                     
+                    </div>
+                  </div>
+                    <div class="checkbox">
+                      <input type="checkbox" name="check" id="">
+                      <label for="check">I have not decided</label>
+                    </div>
+                    <div class="navButtons">
+                      <button id="previousButton" class="btn" onclick="previousSection()"><i class="fa-light fa-arrow-left"></i>Back</button>
+                      <p id="selectionMessage" style="display: none; color: red;">Please select an option.</p>
+                      <button id="nextButton" class="btn" onclick="nextSection()">Next<i class="fa-light fa-arrow-right"></i></button>
+                    </div>
+                </div>
         </div>
       </section>
     </main>
