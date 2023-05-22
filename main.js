@@ -102,6 +102,12 @@ options.forEach(option => {
     option.classList.add('active');
     const selectedOption = option.querySelector('span:first-child').innerText;
     localStorage.setItem('Roof Slope', selectedOption);
+
+    // Update the background image in section 4 column 1
+    const img1Section4 = document.querySelector(".section4 .mainDisplay #column1");
+    const backgroundImageUrl = getRoofImage(selectedOption); // Call the function to get the appropriate image URL
+    img1Section4.style.backgroundImage = backgroundImageUrl;
+    img1Section4.style.transition = "all 1s";
   });
 });
 // this is for active roof slection options
@@ -137,7 +143,18 @@ img1.style.transition = "all 1s";
 
 
 // ---------------------------SECTION-4---------------------------------------------------------------
-
+function getRoofImage(selectedOption) {
+  switch (selectedOption) {
+    case 'Flat roof':
+      return "url('/Assets/flatPanel.png'), url('/Assets/flatRoof.png')";
+    case 'Ordinary ceiling':
+      return "url('/Assets/ordinaryPanel.png'), url('/Assets/ordinaryRoof.png')";
+    case 'Pointed roof':
+      return "url('/Assets/pointedPanel.png'), url('/Assets/pointedRoof.png')";
+    default:
+      return ""; // Return an empty string if no matching image is found
+  }
+}
 const optionsPanel = document.querySelectorAll('.option1');
 const valueDiv = document.querySelector('.price .value span:first-child');
 const investmentDiv = document.querySelector('.price .investment span:first-child');
