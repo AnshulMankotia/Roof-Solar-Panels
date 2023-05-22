@@ -586,8 +586,12 @@ form .inputFields span{
 form .inputFields input{
   padding: 1rem 2rem;
   outline: none;
-  border: none;
-  background-color: rgb(247 247 247)
+  border: 2px solid transparent;
+  background-color: rgb(247 247 247);
+  border-radius: 5px;
+}
+form .inputFields input.input-border {
+  border: 2px solid black;
 }
 /* styling column2*/
 

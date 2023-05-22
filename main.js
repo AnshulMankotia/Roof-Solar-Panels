@@ -226,3 +226,50 @@ for (var i = 1; i < rows.length; i++) {
 }
 
 
+
+//----------------- SECTION-6 STYLING----------------
+// this is for active input field 
+var inputFields = document.querySelectorAll('input');
+
+inputFields.forEach(function(input) {
+  input.addEventListener('focus', function() {
+    this.classList.add('input-border');
+  });
+  
+  input.addEventListener('blur', function() {
+    this.classList.remove('input-border');
+  });
+});
+// this is for active input field 
+
+const quoteButton = document.getElementById("quoteButton");
+
+// Add event listener to the "Get a quote" button
+quoteButton.addEventListener("click", function(event) {
+  event.preventDefault(); // Prevent form submission
+
+  // Get form field values
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
+  const email = document.getElementById("email").value;
+  const phoneNumber = document.getElementById("phoneNumber").value;
+  const address = document.getElementById("address").value;
+  const zipCode = document.getElementById("zipCode").value;
+  const city = document.getElementById("city").value;
+
+  // Create an object to store the form data
+  const formData = {
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    address,
+    zipCode,
+    city
+  };
+
+  // Save the form data to local storage
+  localStorage.setItem("quoteFormData", JSON.stringify(formData));
+  quoteForm.reset();
+});
+

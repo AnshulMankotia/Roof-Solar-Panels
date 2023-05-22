@@ -285,49 +285,48 @@
                 <div class="Summation"> 
                   <h2>Fill in your information</h2>
                   <p>Leave your details so that one of our solar consultants can contact you to give you a more detailed quote and explain how easy it is to install solar panels and start producing your own electricity.</p>
-                  <form action="">
+                  <form id="quoteForm" action="">
                     <div class="inputFields" id="inputField1">
                       <span>
-                        <label for="name">First name</label>
-                     <input type="text" value="">
+                        <label for="firstName">First name</label>
+                        <input type="text" id="firstName" value="">
                       </span>
                       <span>
-                        <label for="surname">Surname</label>
-                     <input type="text" value="">
+                        <label for="lastName">Last name</label>
+                        <input type="text" id="lastName" value="">
                       </span>
                     </div>
                     <div class="inputFields" id="inputField2">
                       <span>
                         <label for="email">Email address</label>
-                     <input type="text" value="">
+                        <input type="text" id="email" value="">
                       </span>
                       <span>
-                        <label for="phone-number">phone number</label>
-                     <input type="number" value="" placeholder="+46 701 234 567">
+                        <label for="phoneNumber">Phone number</label>
+                        <input type="number" id="phoneNumber" value="" placeholder="+46 701 234 567">
                       </span>
                     </div>
                     <div class="inputFields" id="inputField3">
                       <span>
                         <label for="address">Address</label>
-                     <input type="text" value="">
+                        <input type="text" id="address" value="">
                       </span>
                     </div>
                     <div class="inputFields" id="inputField4">
                       <span>
-                        <label for="zip-code">Zip Code</label>
-                     <input type="text" value="">
+                        <label for="zipCode">Zip Code</label>
+                        <input type="text" id="zipCode" value="">
                       </span>
                       <span>
                         <label for="city">City</label>
-                     <input type="text" value="">
+                        <input type="text" id="city" value="">
                       </span>
                     </div>
-                  </form>
                     <div class="navButtons">
                       <button id="previousButton" class="btn" onclick="previousSection()"><i class="fa-light fa-arrow-left"></i>Back</button>
-                      <p id="selectionMessage" style="display: none; color: red;">Please select an option.</p>
-                      <button id="nextButton" class="btn" onclick="nextSection()">Next<i class="fa-light fa-arrow-right"></i></button>
+                      <button id="quoteButton" class="btn">Get a quote<i class="fa-light fa-arrow-right"></i></button>
                     </div>
+                  </form>
                 </div>
         </div>
       </section>
