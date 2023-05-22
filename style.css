@@ -391,6 +391,18 @@ justify-content: space-between;
     color: rgb(255, 255, 255);
 }
 
+.supplement button.activeBox {
+  background: black;
+  color: white;
+}
+
+.supplement button.activeBox:hover {
+  background: #333; /* Change to the desired off-black color */
+}
+.supplement .close-icon {
+  margin-left: 1rem;
+  font-size: 1rem;
+}
 /* styling panel type section */
 
 

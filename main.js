@@ -195,11 +195,38 @@ options2.forEach(option => {
     localStorage.setItem('Panel Type', optionId.charAt(0).toUpperCase() + optionId.slice(1)); // Store the selected option in local storage
   });
 });
-
-
 // This is for active panel Type slection options
+// Add event listeners to the buttons
+var buttons = document.querySelectorAll('.supplement button');
+buttons.forEach(function(button) {
+  // Create the close icon element
+  var closeIconElement = document.createElement('span');
+  closeIconElement.className = 'close-icon';
+  closeIconElement.innerHTML = '&times;';
 
+  // Append the close icon element to each button
+  button.appendChild(closeIconElement);
 
+  // Hide the close icon initially
+  closeIconElement.style.display = 'none';
+
+  // Add click event listener to each button
+  button.addEventListener('click', function() {
+    // Toggle active class
+    button.classList.toggle('activeBox');
+
+    // Check if the button is active
+    var isActive = button.classList.contains('activeBox');
+
+    // Show or hide the close icon based on the active state
+    if (isActive) {
+      closeIconElement.style.display = 'inline-block';
+    } else {
+      closeIconElement.style.display = 'none';
+    }
+  });
+});
+// ---------------------------SECTION-5---------------------------------------------------------------
 
 // Add an event listener to the checkbox
 var checkbox = document.querySelector('.checkbox input');
