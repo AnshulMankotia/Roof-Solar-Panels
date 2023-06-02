@@ -160,14 +160,14 @@ const valueDiv = document.querySelector('.price .value span:first-child');
 const investmentDiv = document.querySelector('.price .investment span:first-child');
 
 const priceData = {
-  'Essential': '4041368 kr',
-  'Design': '3943986 kr',
-  'Pro': '4041368 kr'
+  'Essential': '919 kr',
+  'Design': '897 kr',
+  'Pro': '919 kr'
 };
 const investData = {
-  'Essential': '20533121 kr',
-  'Design': '20881223 kr',
-  'Pro': '36268860 kr'
+  'Essential': '47373 kr',
+  'Design': '47382 kr',
+  'Pro': '46003 kr'
 };
 
 const setActivePanel = (selectedOption) => {
@@ -175,7 +175,18 @@ const setActivePanel = (selectedOption) => {
   localStorage.setItem('Panel Type', selectedOption.querySelector('span:first-child').innerText);
   valueDiv.textContent = priceData[selectedOption.innerText] || 0;
   investmentDiv.textContent = investData[selectedOption.innerText] || 0;
+  
+  // this is to update the value in section 5 class(yourVal) in which value is coming from valueDiv and investmentDiv
+  const yourValElements = document.querySelectorAll('.yourVal');
+  const investementValue = document.querySelectorAll('.investementValue');
+  yourValElements.forEach((element) => {
+    element.textContent ="DKK " + valueDiv.textContent+ "/year";
+  });
+  investementValue.forEach((element) => {
+    element.textContent =investmentDiv.textContent;
+  });
 };
+
 
 optionsPanel.forEach(option => option.addEventListener('click', () => setActivePanel(option)));
 
@@ -196,7 +207,9 @@ options2.forEach(option => {
   });
 });
 // This is for active panel Type slection options
-// Add event listeners to the buttons
+
+
+// Add event listeners to the SUPPLEMENT BUTTONS
 var buttons = document.querySelectorAll('.supplement button');
 buttons.forEach(function(button) {
   // Create the close icon element
@@ -226,6 +239,98 @@ buttons.forEach(function(button) {
     }
   });
 });
+
+// this is for adding the accessories values like laddbox , bacteria etc
+const electricityContractBtn = document.getElementById('electricityContract');
+const laddboxBtn = document.getElementById('laddbox');
+const bacteriaBtn = document.getElementById('bacteria');
+const items = document.querySelectorAll('.accessoriesValue');
+
+electricityContractBtn.addEventListener('click', handleElectricityContractClick);
+laddboxBtn.addEventListener('click', handleLaddboxClick);
+bacteriaBtn.addEventListener('click', handleBacteriaClick);
+
+function handleElectricityContractClick() {
+  const currentValue = parseInt(investmentDiv.textContent) || 0;
+  const addedValue = 0;
+  const totalValue = currentValue + addedValue;
+  investmentDiv.textContent = totalValue + " kr";
+  // this updateItem will be for showing the value of e.c laddbox and bacteria in section Ownership
+  updateItem(0, 'Electricity contract', 0);
+
+  if (electricityContractBtn.classList.contains('active')) {
+    electricityContractBtn.classList.remove('active');
+    investmentDiv.textContent = currentValue - addedValue+ " kr";
+  } else {
+    electricityContractBtn.classList.add('active');
+  }
+}
+
+function handleLaddboxClick() {
+  const currentValue = parseInt(investmentDiv.textContent) || 0;
+  const addedValue = 10000;
+  const totalValue = currentValue + addedValue;
+  investmentDiv.textContent = totalValue + " kr";
+  // this updateItem will be for showing the value of e.c laddbox and bacteria in section Ownership
+  updateItem(1, 'Laddbox', 1000);
+
+  if (laddboxBtn.classList.contains('active')) {
+    laddboxBtn.classList.remove('active');
+    investmentDiv.textContent = currentValue - addedValue+ " kr";
+  } else {
+    laddboxBtn.classList.add('active');
+  }
+}
+
+function handleBacteriaClick() {
+  const currentValue = parseInt(investmentDiv.textContent) || 0;
+  const addedValue = 15000;
+  const totalValue = currentValue + addedValue;
+  investmentDiv.textContent = totalValue + " kr";
+  // this updateItem will be for showing the value of e.c laddbox and bacteria in section Ownership
+  updateItem(2, 'Bacteria', 15000);
+
+  if (bacteriaBtn.classList.contains('active')) {
+    bacteriaBtn.classList.remove('active');
+    investmentDiv.textContent = currentValue - addedValue+ " kr";
+  } else {
+    bacteriaBtn.classList.add('active');
+  }
+}
+
+
+//here is the function for that accessories option which will set value in spans 
+function updateItem(index, text, numericValue) {
+  const accessoriesValue = items[index];
+  const spans = accessoriesValue.querySelectorAll('span');
+  spans[0].textContent = text;
+  spans[1].textContent = numericValue + ' kr';
+  const currentValue = parseInt(investmentDiv.textContent) || 0;
+  const addedValue = numericValue;
+  
+  if (accessoriesValue.classList.contains('activeSpan')) {
+    accessoriesValue.classList.remove('activeSpan');
+    investmentDiv.textContent = currentValue - addedValue + " kr";
+  } else {
+    accessoriesValue.classList.add('activeSpan');
+    investmentDiv.textContent = currentValue + addedValue + " kr";
+  }
+  
+  // Hide the item if no options are selected
+  const activeItems = document.querySelectorAll('.accessoriesValue.activeSpan');
+  if (activeItems.length === 0) {
+    items.forEach(item => {
+      item.style.display = 'none';
+    });
+  } else {
+    items.forEach(item => {
+      item.style.display = 'flex';
+    });
+  }
+}
+// this is for adding the accessories values like laddbox , bacteria etc
+
+
 // ---------------------------SECTION-5---------------------------------------------------------------
 
 // Add an event listener to the checkbox
@@ -269,9 +374,17 @@ for (var i = 1; i < rows.length; i++) {
   });
 }
 
+// this is to set option value as Leasing or buy in Ownership section here i call this function in  html as onclick="updateOption('Buy')" and onclick="updateOption('Leasing')" so Here (option) = Buy/Leasing
+function updateOption(option) {
+  document.getElementById("storedata1").innerText = option;
+}
+
+
+
 
 
 //----------------- SECTION-6 STYLING----------------
+
 // this is for active input field 
 var inputFields = document.querySelectorAll('input');
 
@@ -316,4 +429,6 @@ quoteButton.addEventListener("click", function(event) {
   localStorage.setItem("quoteFormData", JSON.stringify(formData));
   quoteForm.reset();
 });
+
+
 

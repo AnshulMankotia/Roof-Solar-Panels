@@ -224,13 +224,15 @@ color: rgb(61, 61, 61);
   padding: 1rem 0rem;
   outline: none;
 }
+.mainDisplay #column2 .area #metersquare{
+  position: relative;
+}
 .mainDisplay #column2 .area span::after{
   content: "m²";
     display: inline-block;
     position: absolute;
     opacity: 0.7;
-    top: 56%;
-    left: 24%;
+    top:30%;
 }
 /* styling Area section  */
 
@@ -608,3 +610,125 @@ form .inputFields input.input-border {
 /* styling column2*/
 
 /* Styling Section-5 Ownership */
+
+
+
+/* media query for mobile/tablet design */
+@media (max-width:1024px){
+  header{
+    display: none;
+  }
+  .mainDisplay {
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+}
+.mainDisplay #column2 {
+    position: initial;
+}
+.mainDisplay #column2 .options{
+  justify-content: center;
+  position: initial;
+  width: 100%;
+  padding:0rem 1rem;
+}
+.mainDisplay #column2 .area{
+  justify-content: center;
+  position: initial;
+  width: 100%;
+  padding:0rem 1rem;
+}
+.mainDisplay #column2 .roofType{
+  justify-content: center;
+  position: initial;
+  width: 100%;
+  padding:0rem 1rem;
+}
+.mainDisplay #column2 .panelType{
+  justify-content: center;
+  position: initial;
+  width: 100%;
+  padding:0rem 1rem;
+}
+.mainDisplay #column2 .OwnerShip{
+  justify-content: center;
+  position: initial;
+  width: 100%;
+  padding:0rem 1rem;
+}
+.mainDisplay #column2 .Summation{
+  justify-content: center;
+  position: initial;
+  width: 100%;
+  padding:0rem 1rem;
+}
+.navButtons {
+  position: initial;
+}
+.navButtons button{
+  font-size: 13px;
+}
+.mainDisplay #column2 .options input {
+  width: 100%;
+}
+.mainDisplay #column2 .options {
+  height: auto;
+}
+.section1 .mainDisplay #column1 {
+  min-height: 40vh;
+  border-bottom-left-radius:0px;
+}
+.section2 .mainDisplay #column1 {
+  min-height: 40vh;
+  border-bottom-left-radius:0px;
+}
+.section3 .mainDisplay #column1 {
+  min-height: 40vh;
+  border-bottom-left-radius:0px;
+}
+.section4 .mainDisplay #column1 {
+  min-height: 40vh;
+  border-bottom-left-radius:0px;
+}
+.section5 .mainDisplay #column1 {
+  min-height: 40vh;
+  border-bottom-left-radius:0px;
+}
+.section6 .mainDisplay #column1 {
+  min-height: 40vh;
+  border-bottom-left-radius:0px;
+}
+.option {
+  width: 100%;
+}
+.section4 .container {
+  flex-direction: column;
+}
+.supplement {
+  flex-direction: column;
+}
+.supplement button {
+  justify-content: center;
+  width: 100%;
+}
+form .inputFields {
+  flex-direction: column;
+}
+
+.section6 #column1 span {
+  font-size: 1rem;
+}
+.section6 .estimatedPrice span {
+  font-size: 1.3rem !important;
+}
+.section6 .features {
+  flex-direction: column;
+}
+}
+/* media query for mobile/tablet design */
+.accessoriesValue{
+  display: none;
+}
+
+.accessoriesValue.activeSpan {
+  display: flex;
+}
