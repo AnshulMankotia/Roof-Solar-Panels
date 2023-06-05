@@ -89,6 +89,10 @@ function areaInput(){
   };
   localStorage.setItem('Area', JSON.stringify(data1))
 }
+
+
+
+
 // this is to store data in local storage as Area Input fileld
 
 // --------------------------SECTION-3----------------------------------------------------------------
@@ -244,80 +248,80 @@ buttons.forEach(function(button) {
 const electricityContractBtn = document.getElementById('electricityContract');
 const laddboxBtn = document.getElementById('laddbox');
 const bacteriaBtn = document.getElementById('bacteria');
-const items = document.querySelectorAll('.accessoriesValue');
 
 electricityContractBtn.addEventListener('click', handleElectricityContractClick);
 laddboxBtn.addEventListener('click', handleLaddboxClick);
 bacteriaBtn.addEventListener('click', handleBacteriaClick);
 
+const items = document.querySelectorAll('.accessoriesValue');
+
 function handleElectricityContractClick() {
   const currentValue = parseInt(investmentDiv.textContent) || 0;
   const addedValue = 0;
-  const totalValue = currentValue + addedValue;
-  investmentDiv.textContent = totalValue + " kr";
-  // this updateItem will be for showing the value of e.c laddbox and bacteria in section Ownership
-  updateItem(0, 'Electricity contract', 0);
 
   if (electricityContractBtn.classList.contains('active')) {
     electricityContractBtn.classList.remove('active');
-    investmentDiv.textContent = currentValue - addedValue+ " kr";
+    investmentDiv.textContent = currentValue - addedValue + ' kr';
+    updateItem(0, '', 0, false);
   } else {
     electricityContractBtn.classList.add('active');
+    investmentDiv.textContent = currentValue + addedValue + ' kr';
+    updateItem(0, 'Electricity contract', 0, true);
   }
+
+  updateVisibility();
 }
 
 function handleLaddboxClick() {
   const currentValue = parseInt(investmentDiv.textContent) || 0;
   const addedValue = 10000;
-  const totalValue = currentValue + addedValue;
-  investmentDiv.textContent = totalValue + " kr";
-  // this updateItem will be for showing the value of e.c laddbox and bacteria in section Ownership
-  updateItem(1, 'Laddbox', 1000);
 
   if (laddboxBtn.classList.contains('active')) {
     laddboxBtn.classList.remove('active');
-    investmentDiv.textContent = currentValue - addedValue+ " kr";
+    investmentDiv.textContent = currentValue - addedValue + ' kr';
+    updateItem(1, '', 0, false);
   } else {
     laddboxBtn.classList.add('active');
+    investmentDiv.textContent = currentValue + addedValue + ' kr';
+    updateItem(1, 'Laddbox', 1000, true);
   }
+
+  updateVisibility();
 }
 
 function handleBacteriaClick() {
   const currentValue = parseInt(investmentDiv.textContent) || 0;
   const addedValue = 15000;
-  const totalValue = currentValue + addedValue;
-  investmentDiv.textContent = totalValue + " kr";
-  // this updateItem will be for showing the value of e.c laddbox and bacteria in section Ownership
-  updateItem(2, 'Bacteria', 15000);
 
   if (bacteriaBtn.classList.contains('active')) {
     bacteriaBtn.classList.remove('active');
-    investmentDiv.textContent = currentValue - addedValue+ " kr";
+    investmentDiv.textContent = currentValue - addedValue + ' kr';
+    updateItem(2, '', 0, false);
   } else {
     bacteriaBtn.classList.add('active');
+    investmentDiv.textContent = currentValue + addedValue + ' kr';
+    updateItem(2, 'Bacteria', 15000, true);
   }
+
+  updateVisibility();
 }
 
-
-//here is the function for that accessories option which will set value in spans 
-function updateItem(index, text, numericValue) {
+function updateItem(index, text, numericValue, isActive) {
   const accessoriesValue = items[index];
   const spans = accessoriesValue.querySelectorAll('span');
   spans[0].textContent = text;
   spans[1].textContent = numericValue + ' kr';
-  const currentValue = parseInt(investmentDiv.textContent) || 0;
-  const addedValue = numericValue;
-  
-  if (accessoriesValue.classList.contains('activeSpan')) {
-    accessoriesValue.classList.remove('activeSpan');
-    investmentDiv.textContent = currentValue - addedValue + " kr";
-  } else {
+
+  if (isActive) {
     accessoriesValue.classList.add('activeSpan');
-    investmentDiv.textContent = currentValue + addedValue + " kr";
+  } else {
+    accessoriesValue.classList.remove('activeSpan');
   }
-  
-  // Hide the item if no options are selected
+}
+
+function updateVisibility() {
   const activeItems = document.querySelectorAll('.accessoriesValue.activeSpan');
+
   if (activeItems.length === 0) {
     items.forEach(item => {
       item.style.display = 'none';
