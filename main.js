@@ -266,7 +266,7 @@ function handleElectricityContractClick() {
   } else {
     electricityContractBtn.classList.add('active');
     investmentDiv.textContent = currentValue + addedValue + ' kr';
-    updateItem(0, 'Electricity contract', 0, true);
+    updateItem(0, 'Electricity contract', addedValue, true);
   }
 
   updateVisibility();
@@ -283,7 +283,7 @@ function handleLaddboxClick() {
   } else {
     laddboxBtn.classList.add('active');
     investmentDiv.textContent = currentValue + addedValue + ' kr';
-    updateItem(1, 'Laddbox', 1000, true);
+    updateItem(1, 'Laddbox', addedValue, true);
   }
 
   updateVisibility();
@@ -300,12 +300,14 @@ function handleBacteriaClick() {
   } else {
     bacteriaBtn.classList.add('active');
     investmentDiv.textContent = currentValue + addedValue + ' kr';
-    updateItem(2, 'Bacteria', 15000, true);
+    updateItem(2, 'Bacteria', addedValue, true);
   }
 
   updateVisibility();
 }
 
+
+// this is for adding the accessories values like laddbox , bacteria etc
 function updateItem(index, text, numericValue, isActive) {
   const accessoriesValue = items[index];
   const spans = accessoriesValue.querySelectorAll('span');
@@ -319,9 +321,9 @@ function updateItem(index, text, numericValue, isActive) {
   }
 }
 
-function updateVisibility() {
-  const activeItems = document.querySelectorAll('.accessoriesValue.activeSpan');
 
+function updateVisibility() { 
+  const activeItems = document.querySelectorAll('.accessoriesValue.activeSpan');
   if (activeItems.length === 0) {
     items.forEach(item => {
       item.style.display = 'none';
@@ -433,6 +435,3 @@ quoteButton.addEventListener("click", function(event) {
   localStorage.setItem("quoteFormData", JSON.stringify(formData));
   quoteForm.reset();
 });
-
-
-
