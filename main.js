@@ -99,6 +99,13 @@ function areaInput(){
 
 // this is for active roof slection options
 const options = document.querySelectorAll('.option');
+const defaultOption = document.querySelector('#ordinaryRoof');
+const nextButton = document.getElementById('nextButton');
+const img1 = document.querySelector(".section3 .mainDisplay #column1");
+
+defaultOption.classList.add('active');
+const selectedOption = defaultOption.querySelector('span:first-child').innerText;
+localStorage.setItem('Roof Slope', selectedOption);
 
 options.forEach(option => {
   option.addEventListener('click', () => {
@@ -114,34 +121,33 @@ options.forEach(option => {
     img1Section4.style.transition = "all 1s";
   });
 });
-// this is for active roof slection options
-const nextButton = document.getElementById('nextButton');
+
 nextButton.addEventListener('click', () => {
   localStorage.setItem('Roof Slope', selectedOption);
 });
-// This is for changing images in the background
-const img1 = document.querySelector(".section3 .mainDisplay #column1");
+
 const flatRoof = document.querySelector('#flatRoof');
 const ordinaryRoof = document.querySelector('#ordinaryRoof');
 const pointedRoof = document.querySelector('#pointedRoof');
+
 flatRoof.addEventListener('click', () => {
-  img1.style.backgroundImage ="url('/Assets/flatPanel.png'), url('/Assets/flatRoof.png')";
-  img1.style.transition ="all 1s"
-})
+  img1.style.backgroundImage = "url('/Assets/flatPanel.png'), url('/Assets/flatRoof.png')";
+  img1.style.transition = "all 1s";
+});
+
 ordinaryRoof.addEventListener('click', () => {
-  img1.style.backgroundImage ="url('/Assets/ordinaryPanel.png'), url('/Assets/ordinaryRoof.png')";
-  img1.style.transition ="all 1s"
-})
+  img1.style.backgroundImage = "url('/Assets/ordinaryPanel.png'), url('/Assets/ordinaryRoof.png')";
+  img1.style.transition = "all 1s";
+});
+
 pointedRoof.addEventListener('click', () => {
-  img1.style.backgroundImage ="url('/Assets/pointedPanel.png'), url('/Assets/pointedRoof.png')";
-  img1.style.transition ="all 1s"
-})
-const defaultOption = document.querySelector('#ordinaryRoof');
-defaultOption.classList.add('active');
-const selectedOption = defaultOption.querySelector('span:first-child').innerText;
-localStorage.setItem('Roof Slope', selectedOption);
-img1.style.backgroundImage = "url('/Assets/ordinaryPanel.png'), url('/Assets/ordinaryRoof.png')";
-img1.style.transition = "all 1s";
+  img1.style.backgroundImage = "url('/Assets/pointedPanel.png'), url('/Assets/pointedRoof.png')";
+  img1.style.transition = "all 1s";
+});
+
+// Trigger the click event on the default option means the design option has been clicked means set to default
+defaultOption.click();
+
 // This is for changing images in the background
 // This is for active roof slection options
 
@@ -179,16 +185,21 @@ const setActivePanel = (selectedOption) => {
   localStorage.setItem('Panel Type', selectedOption.querySelector('span:first-child').innerText);
   valueDiv.textContent = priceData[selectedOption.innerText] || 0;
   investmentDiv.textContent = investData[selectedOption.innerText] || 0;
-  
+
   // this is to update the value in section 5 class(yourVal) in which value is coming from valueDiv and investmentDiv
-  const yourValElements = document.querySelectorAll('.yourVal');
-  const investementValue = document.querySelectorAll('.investementValue');
-  yourValElements.forEach((element) => {
-    element.textContent ="DKK " + valueDiv.textContent+ "/year";
-  });
-  investementValue.forEach((element) => {
-    element.textContent =investmentDiv.textContent;
-  });
+const yourValElements = document.querySelectorAll('.yourVal');
+const investementValue = document.querySelectorAll('.investementValue');
+yourValElements.forEach((element) => {
+  element.textContent ="DKK " + valueDiv.textContent+ "/year";
+});
+investementValue.forEach((element) => {
+  element.textContent =investmentDiv.textContent;
+});
+
+
+//this is set the total estimated price in the Ownership section
+const estimatedPriceSpan = document.querySelector('.estimatedPrice.item span:nth-child(2)');
+estimatedPriceSpan.textContent = investmentDiv.textContent;
 };
 
 
@@ -258,15 +269,27 @@ const items = document.querySelectorAll('.accessoriesValue');
 function handleElectricityContractClick() {
   const currentValue = parseInt(investmentDiv.textContent) || 0;
   const addedValue = 0;
+  let selectedAccessories = JSON.parse(localStorage.getItem('Accessories')) || [];
 
   if (electricityContractBtn.classList.contains('active')) {
     electricityContractBtn.classList.remove('active');
     investmentDiv.textContent = currentValue - addedValue + ' kr';
     updateItem(0, '', 0, false);
+    const index = selectedAccessories.indexOf('Electricity Contract');
+    if (index !== -1) {
+      selectedAccessories.splice(index, 1);
+    }
   } else {
     electricityContractBtn.classList.add('active');
     investmentDiv.textContent = currentValue + addedValue + ' kr';
     updateItem(0, 'Electricity contract', addedValue, true);
+    selectedAccessories.push('Electricity Contract');
+  }
+
+  if (selectedAccessories.length === 0) {
+    localStorage.removeItem('Accessories');
+  } else {
+    localStorage.setItem('Accessories', JSON.stringify(selectedAccessories));
   }
 
   updateVisibility();
@@ -275,15 +298,52 @@ function handleElectricityContractClick() {
 function handleLaddboxClick() {
   const currentValue = parseInt(investmentDiv.textContent) || 0;
   const addedValue = 10000;
+  let selectedAccessories = JSON.parse(localStorage.getItem('Accessories')) || [];
 
   if (laddboxBtn.classList.contains('active')) {
     laddboxBtn.classList.remove('active');
     investmentDiv.textContent = currentValue - addedValue + ' kr';
     updateItem(1, '', 0, false);
+    const index = selectedAccessories.indexOf('Laddbox');
+    if (index !== -1) {
+      selectedAccessories.splice(index, 1);
+    }
+
+    // this is to update the value in section 5 class(yourVal) in which value is coming from valueDiv and investmentDiv
+    const yourValElements = document.querySelectorAll('.yourVal');
+    const investementValue = document.querySelectorAll('.investementValue');
+    yourValElements.forEach((element) => {
+      element.textContent ="DKK " + valueDiv.textContent - addedValue+"/year";
+    });
+    investementValue.forEach((element) => {
+    element.textContent =investmentDiv.textContent;
+    });
+    //this is set the total estimated price in the Ownership section
+    const estimatedPriceSpan = document.querySelector('.estimatedPrice.item span:nth-child(2)');
+    estimatedPriceSpan.textContent = investmentDiv.textContent;
   } else {
     laddboxBtn.classList.add('active');
     investmentDiv.textContent = currentValue + addedValue + ' kr';
     updateItem(1, 'Laddbox', addedValue, true);
+    selectedAccessories.push('Laddbox');
+    // this is to update the value in section 5 class(yourVal) in which value is coming from valueDiv and investmentDiv
+    const yourValElements = document.querySelectorAll('.yourVal');
+    const investementValue = document.querySelectorAll('.investementValue');
+    yourValElements.forEach((element) => {
+      element.textContent ="DKK " + valueDiv.textContent+ addedValue+"/year";
+    });
+    investementValue.forEach((element) => {
+    element.textContent =investmentDiv.textContent;
+});
+  //this is set the total estimated price in the Ownership section
+  const estimatedPriceSpan = document.querySelector('.estimatedPrice.item span:nth-child(2)');
+  estimatedPriceSpan.textContent = investmentDiv.textContent;
+  }
+
+  if (selectedAccessories.length === 0) {
+    localStorage.removeItem('Accessories');
+  } else {
+    localStorage.setItem('Accessories', JSON.stringify(selectedAccessories));
   }
 
   updateVisibility();
@@ -292,15 +352,53 @@ function handleLaddboxClick() {
 function handleBacteriaClick() {
   const currentValue = parseInt(investmentDiv.textContent) || 0;
   const addedValue = 15000;
+  let selectedAccessories = JSON.parse(localStorage.getItem('Accessories')) || [];
 
   if (bacteriaBtn.classList.contains('active')) {
     bacteriaBtn.classList.remove('active');
     investmentDiv.textContent = currentValue - addedValue + ' kr';
     updateItem(2, '', 0, false);
+    const index = selectedAccessories.indexOf('Bacteria');
+    if (index !== -1) {
+      selectedAccessories.splice(index, 1);
+    }
+    // this is to update the value in section 5 class(yourVal) in which value is coming from valueDiv and investmentDiv
+    const yourValElements = document.querySelectorAll('.yourVal');
+    const investementValue = document.querySelectorAll('.investementValue');
+    yourValElements.forEach((element) => {
+      element.textContent ="DKK " + valueDiv.textContent- addedValue+"/year";
+    });
+    investementValue.forEach((element) => {
+    element.textContent =investmentDiv.textContent;
+});
+ //this is set the total estimated price in the Ownership section
+ const estimatedPriceSpan = document.querySelector('.estimatedPrice.item span:nth-child(2)');
+ estimatedPriceSpan.textContent = investmentDiv.textContent;
+
   } else {
     bacteriaBtn.classList.add('active');
     investmentDiv.textContent = currentValue + addedValue + ' kr';
     updateItem(2, 'Bacteria', addedValue, true);
+    selectedAccessories.push('Bacteria');
+
+    // this is to update the value in section 5 class(yourVal) in which value is coming from valueDiv and investmentDiv
+    const yourValElements = document.querySelectorAll('.yourVal');
+    const investementValue = document.querySelectorAll('.investementValue');
+    yourValElements.forEach((element) => {
+      element.textContent ="DKK " + valueDiv.textContent+ addedValue+"/year";
+    });
+    investementValue.forEach((element) => {
+    element.textContent =investmentDiv.textContent;
+});
+ //this is set the total estimated price in the Ownership section
+ const estimatedPriceSpan = document.querySelector('.estimatedPrice.item span:nth-child(2)');
+ estimatedPriceSpan.textContent = investmentDiv.textContent;
+  }
+
+  if (selectedAccessories.length === 0) {
+    localStorage.removeItem('Accessories');
+  } else {
+    localStorage.setItem('Accessories', JSON.stringify(selectedAccessories));
   }
 
   updateVisibility();
@@ -320,7 +418,6 @@ function updateItem(index, text, numericValue, isActive) {
     accessoriesValue.classList.remove('activeSpan');
   }
 }
-
 
 function updateVisibility() { 
   const activeItems = document.querySelectorAll('.accessoriesValue.activeSpan');
@@ -386,9 +483,6 @@ function updateOption(option) {
 }
 
 
-
-
-
 //----------------- SECTION-6 STYLING----------------
 
 // this is for active input field 
@@ -404,13 +498,12 @@ inputFields.forEach(function(input) {
   });
 });
 // this is for active input field 
-
 const quoteButton = document.getElementById("quoteButton");
 
 // Add event listener to the "Get a quote" button
 quoteButton.addEventListener("click", function(event) {
   event.preventDefault(); // Prevent form submission
-
+  
   // Get form field values
   const firstName = document.getElementById("firstName").value;
   const lastName = document.getElementById("lastName").value;
@@ -419,7 +512,7 @@ quoteButton.addEventListener("click", function(event) {
   const address = document.getElementById("address").value;
   const zipCode = document.getElementById("zipCode").value;
   const city = document.getElementById("city").value;
-
+  
   // Create an object to store the form data
   const formData = {
     firstName,
@@ -430,8 +523,31 @@ quoteButton.addEventListener("click", function(event) {
     zipCode,
     city
   };
-
+  
   // Save the form data to local storage
-  localStorage.setItem("quoteFormData", JSON.stringify(formData));
+  localStorage.setItem("Form Data", JSON.stringify(formData));
   quoteForm.reset();
+  
+  // I am this function here bcz to store all the data in a single key at
+  getAllLocalStorageData();
 });
+//----------------- SECTION-6 STYLING----------------
+
+
+
+// Get All the Local Storage Data within a Single Key
+function getAllLocalStorageData() {
+  var userData = {};
+  
+  // Iterate through the local storage keys
+  for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    var value = localStorage.getItem(key);
+    // Add the key-value pair to the user data object
+    userData[key] = value;
+  }
+
+  // Store the user data object in local storage
+  localStorage.setItem('User Data', JSON.stringify(userData));
+}
+
